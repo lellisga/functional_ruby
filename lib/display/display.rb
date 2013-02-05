@@ -41,6 +41,8 @@ set_char = ->(character){
   end
 }
 
-p GRID
-clear.()
-p GRID
+# puts GRID
+# [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# clear.()
+# puts GRID
+# [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
