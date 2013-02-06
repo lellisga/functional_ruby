@@ -1,48 +1,52 @@
-GRID =
-  [1, 2, 3], 
-  [4, 5, 6], 
-  [7, 8, 9]
+module Display
+  Height = ->(grid){
+    grid.size
+  }
 
-height = 2
-wide = 2
+  Wide = ->(grid){
+    grid[0].size
+  }
 
-CHARS = {
-  l: [[0,2]]
-}
+  Get = ->(grid, x, y){
+    grid[x][y]
+  }
 
-get = ->(x, y){
-  GRID[x][y]
-}
+  Set = ->(grid, x, y, value){
+    grid[x][y] = value
+    grid
+  }
 
-set = ->(x, y, value){
-  GRID[x][y] = value
-}
-
-clear = ->(){
-  temp_x = 0
-  while temp_x <= wide
-    temp_y = 0
-    while temp_y <= height
-      set.(temp_x, temp_y, 0)
-      temp_y = temp_y + 1
+  Clear = ->(grid, y = 0, x = 0){
+    return grid unless y < Height.(grid)
+    if x < Wide.(grid)
+      grid = Set.(grid, y, x, 0)
+      Clear.(grid, y, x + 1)
+    else
+      Clear.(grid, y + 1 )
     end
-    temp_x = temp_x + 1
-  end
-}
+  }
 
-set_char = ->(character){
-  clear.()
-  CHARS[character.to_sym].each do |range|
-    temp = range[0]
-    while temp <= range[1]
-      set.(temp, 0, 1)
-      temp = temp + 1
+  Create_grid = ->(height, wide, grid = [], sub_grid = [], x = 0, y = 0){
+    return grid unless y < height
+    if x < wide
+      Create_grid.(height, wide, grid, sub_grid << 0 , x + 1, y)
+    else 
+      Create_grid.(height, wide, grid << sub_grid, [], 0 , y + 1)
     end
-  end
-}
+  }
 
-# puts GRID
-# [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-# clear.()
-# puts GRID
-# [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+  Square = ->(grid, n, x = 0){
+    return grid unless x < n
+    grid = Set.(grid, 0, x, "*")
+    grid = Set.(grid, x, 0, "*")
+    grid = Set.(grid, n-1, x, "*")
+    grid = Set.(grid, x, n-1, "*")
+    Square.(grid, n, x + 1)
+  }
+
+  Print = ->(grid, y = 0){
+    return unless y < Height.(grid)
+    puts grid[y].join( " " )
+    Print.(grid, y + 1)
+  }
+end

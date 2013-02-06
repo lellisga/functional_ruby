@@ -1,1 +1,2 @@
-require 'display/display_test'
+require 'display/display_oo'
+require 'display/display'
