@@ -7,9 +7,7 @@ class DisplayOO
 
   def clear
     wide.times do |x|
-      height.times do |y|
-        set(x, y, 0)
-      end
+      height.times { |y| set(x, y, 0) }
     end
   end
 
@@ -28,9 +26,7 @@ class DisplayOO
 
   def self.create_grid(m, n)
     Array.new.tap do |grid|
-      m.times do
-        grid << (0...n).each_with_object([]){ |_, ar| ar << 0 }
-      end
+      m.times { grid << (0...n).each_with_object([]){ |_, ar| ar << 0 } }
     end
   end
 
