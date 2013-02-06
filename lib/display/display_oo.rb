@@ -5,6 +5,39 @@ class DisplayOO
     @grid = grid
   end
 
+  def clear
+    wide.times do |x|
+      height.times do |y|
+        set(x, y, 0)
+      end
+    end
+    grid
+  end
+
+  def square(n, value = "*")
+    n.times do |x|
+      set(0, x, value)
+      set(x, 0, value)
+      set(n-1, x, value)
+      set(x, n - 1, value)
+    end
+    grid
+  end
+
+  def print
+    (0...height).each { |y| puts grid[y].join " " }
+  end
+
+  def self.create_grid(m, n)
+    Array.new.tap do |grid|
+      m.times do
+        grid << (0...n).each_with_object([]){ |_, ar| ar << 0 }
+      end
+    end
+  end
+
+  private
+
   def height
     grid.size
   end
@@ -19,56 +52,5 @@ class DisplayOO
 
   def set(x, y, value)
     grid[x][y] = value
-    grid
-  end
-
-  def clear
-    x = 0
-    while x < wide
-      y = 0
-      while y < height
-        set(x, y, 0)
-        y += 1
-      end
-      x += 1
-    end
-    grid
-  end
-
-  def square(n)
-    x = 0
-    value = "*"
-    while x < n
-      grid = set(0, x, value)
-      grid = set(x, 0, value)
-      grid = set(n-1, x, value)
-      grid = set(x, n-1, value)
-      x += 1
-    end
-    grid
-  end
-
-  def print
-    y = 0
-    while y < height
-      p grid[y].join( " " )
-      y += 1
-    end
-  end
-
-  def self.create_grid(m, n)
-    y = 0
-    grid = []
-    while y < m
-      x = 0
-      sub = []
-      while x < n
-        sub << 0
-        x += 1
-      end
-      grid << sub
-      y += 1
-    end
-    grid
   end
 end
