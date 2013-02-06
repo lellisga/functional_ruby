@@ -11,7 +11,6 @@ class DisplayOO
         set(x, y, 0)
       end
     end
-    grid
   end
 
   def square(n, value = "*")
@@ -21,7 +20,6 @@ class DisplayOO
       set(n-1, x, value)
       set(x, n - 1, value)
     end
-    grid
   end
 
   def print

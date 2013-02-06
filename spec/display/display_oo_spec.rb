@@ -11,8 +11,8 @@ describe DisplayOO do
 
   describe "#clear" do
     it "sets the grid values to zero" do
-      result = subject.clear
-      result.should == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      subject.clear
+      subject.grid.should == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     end
   end
 
@@ -27,8 +27,8 @@ describe DisplayOO do
     it "creates a square given a grid" do
       grid = DisplayOO.create_grid(3,3)
       dpo = DisplayOO.new(grid)
-      result = dpo.square(2) 
-      result.should == [
+      dpo.square(2)
+      dpo.grid.should == [
         ["*", "*", 0], 
         ["*", "*", 0], 
         [  0,   0, 0]]
