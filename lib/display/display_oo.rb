@@ -13,10 +13,7 @@ class DisplayOO
 
   def square(n, value = "*")
     n.times do |x|
-      set(0, x, value)
-      set(x, 0, value)
-      set(n-1, x, value)
-      set(x, n - 1, value)
+      set(0, x, value); set(x, 0, value); set(n-1, x, value); set(x, n - 1, value)
     end
   end
 

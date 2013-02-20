@@ -29,7 +29,7 @@ module Display
   }
 
   Create_grid = ->(height, wide, grid = [], sub_grid = [], x = 0, y = 0){
-    return grid unless y < height
+    return grid.freeze unless y < height
     return Create_grid.(height, wide, grid, sub_grid << 0 , x + 1, y) if x < wide
     return Create_grid.(height, wide, grid << sub_grid.freeze, [], 0 , y + 1)
   }
